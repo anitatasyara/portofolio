@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anita Tasyara | Graphic Designer & Illustrator</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        :root {
+            --pink-light: #FFF5F7;
+            --pink-soft: #FFD6E5;
+            --pink-main: #FF87AB;
+            --pink-deep: #FF6392;
+            --purple-dark: #50223C;
+            --yellow-cute: #FFEC87;
+            --lavender-soft: #E6E0FF;
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--pink-light);
+            color: var(--purple-dark);
+            overflow-x: hidden;
+            font-size: 17px; /* Ukuran font dasar lebih besar */
+            /* Pola latar belakang yang lembut */
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23FFD6E5' fill-opacity='0.15'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        h1, h2, h3, h4 { font-family: 'Fredoka', sans-serif; }
+
+        /* --- PRELOADER --- */
+        #preloader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--pink-light); z-index: 10000; display: flex; justify-content: center; align-items: center; transition: opacity 0.5s ease; }
+        .preloader-heart { font-size: 5rem; color: var(--pink-main); animation: pulse-heart 1.5s infinite ease-in-out; }
+        @keyframes pulse-heart { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+
+        /* --- INTERACTIVE CURSOR TRAIL --- */
+        .cursor-trail { position: fixed; width: 10px; height: 10px; background: var(--pink-main); border-radius: 50%; pointer-events: none; z-index: 9998; transition: transform 0.2s, opacity 0.5s; transform-origin: center center; }
+
+        #progress-bar { position: fixed; top: 0; left: 0; height: 6px; background: linear-gradient(to right, var(--pink-main), var(--yellow-cute)); width: 0%; z-index: 100; border-bottom-right-radius: 8px; transition: width 0.1s linear; }
+
+        .btn-cute {
+            background: linear-gradient(45deg, var(--pink-deep), var(--pink-main)); /* Gradasi */
+            color: white; padding: 14px 32px; border-radius: 9999px;
+            font-weight: bold; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            box-shadow: 0px 5px 15px rgba(255, 135, 171, 0.5); border: 3px solid white;
+            outline: 2px solid var(--pink-main); position: relative;
+        }
+        .btn-cute:hover { transform: translateY(-5px) scale(1.05) rotate(-3deg); box-shadow: 0px 8px 20px rgba(255, 135, 171, 0.7); }
+        .btn-cute:disabled { background: #ccc; cursor: not-allowed; }
+        .btn-cute.clicked { animation: jelly-press 0.4s ease-in-out; }
+
+        .blob { position: absolute; border-radius: 50%; opacity: 0.25; filter: blur(60px); z-index: -1; animation: moveBlob 25s infinite alternate; }
+        @keyframes moveBlob { from { transform: translate(0, 0) scale(1) rotate(0deg); } 50% { transform: translate(80px, -40px) scale(1.2) rotate(180deg); } to { transform: translate(-50px, 60px) scale(0.9) rotate(360deg); } }
+
+        @keyframes float-gentle { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
+        @keyframes sparkle { 0%, 100% { transform: scale(0) rotate(0deg); opacity: 0; } 50% { transform: scale(1) rotate(180deg); opacity: 1; } 80% { transform: scale(1.2) rotate(360deg); opacity: 0; } }
+        @keyframes jelly-press { 0% { transform: scale(1, 1); } 30% { transform: scale(1.1, 0.9); } 60% { transform: scale(0.9, 1.1); } 100% { transform: scale(1, 1); } }
+        @keyframes text-pop-up-top { 0% { transform: translateY(20px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
+        @keyframes wiggle { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(-10deg); } 75% { transform: rotate(10deg); } }
+
+        .anim-float { animation: float-gentle 6s ease-in-out infinite; }
+        .sparkle-element { position: absolute; animation: sparkle 2.5s infinite; }
+        .anim-text-pop { animation: text-pop-up-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both; }
+        .scroll-animate { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.6s ease-out; }
+        .scroll-animate.visible { opacity: 1; transform: translateY(0); }
+
+        .title-underline { position: relative; display: inline-block; padding-bottom: 15px; }
+        .title-underline::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); height: 8px; width: 0; background-image: url("data:image/svg+xml,%3Csvg width='100' height='10' viewBox='0 0 100 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 6C13.8854 2.14815 32.7391 -1.45679 50 4C67.2609 9.45679 86.1146 8.14815 98 6' stroke='%23FF87AB' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E%0A"); background-size: cover; background-repeat: no-repeat; transition: width 1s cubic-bezier(0.19, 1, 0.22, 1); }
+        .title-underline.visible::after { width: 80%; }
+
+        .cute-card { background-color: white; border-radius: 24px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); padding: 3rem; position: relative; overflow: visible; /* allow bow to show */ border: 2px solid var(--pink-soft); transition: transform 0.3s, box-shadow 0.3s; }
+        .cute-card:hover { transform: translateY(-8px); box-shadow: 0 15px 25px rgba(255, 214, 229, 0.8), 0 0 40px var(--pink-soft); }
+
+        /* Pita imut untuk kartu */
+        .card-with-bow::before { content: '🎀'; font-size: 3.5rem; position: absolute; top: -30px; left: 50%; transform: translateX(-50%) rotate(-8deg); z-index: 1; }
+
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-in-out; }
+
+        /* --- SKILL BARS --- */
+        .skill-bar-container { background-color: var(--pink-soft); border-radius: 999px; overflow: hidden; }
+        .skill-bar { background: linear-gradient(to right, var(--pink-main), var(--yellow-cute)); height: 100%; width: 0; border-radius: 999px; transition: width 1.5s cubic-bezier(0.19, 1, 0.22, 1); }
+
+        /* --- TESTIMONIALS SECTION --- */
+        .testimonial-slider-container { overflow: hidden; }
+        .testimonial-slider { display: flex; transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1); }
+        .testimonial-slide { min-width: 100%; box-sizing: border-box; padding: 0 1rem; }
+        .testimonial-card { background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-align: center; border: 2px dashed var(--pink-soft); }
+        .testimonial-card img { border: 4px solid var(--pink-soft); }
+        .testimonial-dots { text-align: center; margin-top: 1.5rem; }
+        .testimonial-dot { display: inline-block; width: 12px; height: 12px; background-color: var(--pink-soft); border-radius: 50%; margin: 0 5px; cursor: pointer; transition: background-color 0.3s; }
+        .testimonial-dot.active { background-color: var(--pink-main); }
+
+        /* --- BACK TO TOP BUTTON --- */
+        #back-to-top { position: fixed; bottom: 2rem; right: 2rem; width: 50px; height: 50px; background-color: var(--pink-main); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; box-shadow: 0 5px 15px rgba(0,0,0,0.2); transform: translateY(100px); transition: transform 0.5s; z-index: 50; }
+        #back-to-top.visible { transform: translateY(0); }
+        #back-to-top:hover { animation: wiggle 0.5s; }
+
+        nav a.active { color: var(--pink-deep); font-weight: bold; }
+    </style>
+</head>
+<body class="antialiased relative">
+<div id="preloader"><i class="ph-fill ph-heart preloader-heart"></i></div>
+<div id="progress-bar"></div>
+
+<!-- Elemen Blob yang lebih ramai -->
+<div class="blob w-96 h-96 bg-pink-300 top-20 left-[-150px]"></div>
+<div class="blob w-72 h-72 bg-yellow-200 bottom-40 right-[-100px]" style="animation-duration: 20s;"></div>
+<div class="blob w-80 h-80 bg-lavender-soft top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" style="animation-duration: 30s;"></div>
+<div class="blob w-64 h-64 bg-pink-200 bottom-1/3 left-[5%]" style="animation-delay: -5s;"></div>
+<div class="blob w-56 h-56 bg-purple-200 top-[15%] right-[5%]" style="animation-duration: 22s;"></div>
+
+
+<header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+    <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="#" class="text-3xl font-bold text-pink-500 transition-transform hover:scale-110 hover:rotate-[-3deg] flex items-center gap-2" style="font-family: 'Fredoka', sans-serif;">
+            Anita <i class="ph-fill ph-sparkle text-yellow-400"></i>
+        </a>
+        <div class="hidden md:flex space-x-8 items-center font-semibold">
+            <a href="#about" class="nav-link hover:text-pink-500 transition-colors">Tentang</a>
+            <a href="#skills" class="nav-link hover:text-pink-500 transition-colors">Keahlian</a>
+            <a href="#experience" class="nav-link hover:text-pink-500 transition-colors">Pengalaman</a>
+            <a href="#portfolio" class="nav-link hover:text-pink-500 transition-colors">Portofolio</a>
+            <a href="#testimonials" class="nav-link hover:text-pink-500 transition-colors">Testimoni</a>
+            <a href="#contact" class="btn-cute">Kontak!</a>
+        </div>
+        <button id="mobile-menu-btn" class="md:hidden text-3xl text-pink-500"><i class="ph ph-list"></i></button>
+    </nav>
+    <div id="mobile-menu" class="hidden md:hidden bg-white/95">
+        <a href="#about" class="block text-center py-3 hover:bg-pink-100 transition-colors">Tentang</a>
+        <a href="#skills" class="block text-center py-3 hover:bg-pink-100 transition-colors">Keahlian</a>
+        <a href="#experience" class="block text-center py-3 hover:bg-pink-100 transition-colors">Pengalaman</a>
+        <a href="#portfolio" class="block text-center py-3 hover:bg-pink-100 transition-colors">Portofolio</a>
+        <a href="#testimonials" class="block text-center py-3 hover:bg-pink-100 transition-colors">Testimoni</a>
+        <a href="#contact" class="block text-center py-4 bg-pink-500 text-white font-bold">Kontak!</a>
+    </div>
+</header>
+
+<main class="container mx-auto px-6 py-16 z-10 relative">
+    <section id="home" class="flex flex-col md:flex-row items-center justify-center text-center md:text-left min-h-[85vh]">
+        <div class="md:w-1/2 mb-10 md:mb-0 relative">
+            <i class="ph-fill ph-magic-wand text-5xl opacity-40 absolute top-[-20px] left-[-20px] transform rotate-[-15deg] anim-float text-purple-400" style="animation-duration: 8s;"></i>
+            <i class="ph-fill ph-paint-brush-broad text-5xl opacity-40 absolute bottom-[-20px] right-[-20px] transform rotate-[15deg] anim-float text-pink-400" style="animation-duration: 7s; animation-delay: 0.5s;"></i>
+            <h3 class="text-2xl text-pink-500 font-semibold anim-text-pop" style="animation-delay: 0.2s;">Halo, saya Anita Tasyara!</h3>
+            <h1 class="text-6xl md:text-8xl font-bold my-4 leading-tight text-purple-800 anim-text-pop" style="animation-delay: 0.4s;">Designer & Illustrator Worker</h1>
+            <p class="text-xl mb-8 max-w-lg mx-auto md:mx-0 anim-text-pop" style="animation-delay: 0.6s;">Menyulap ide menjadi karya visual yang inovatif, penuh warna, dan tak terlupakan!</p>
+            <div class="anim-text-pop" style="animation-delay: 0.8s;">
+                <a href="#portfolio" class="btn-cute text-lg">Lihat Karya Hebat Saya <i class="ph-fill ph-sparkle inline-block"></i></a>
+            </div>
+        </div>
+        <div class="md:w-1/2 relative flex justify-center items-center">
+            <div class="absolute bg-pink-300/30 w-96 h-96 rounded-full -z-10 blur-3xl"></div>
+            <img src="anita.webp" alt="[Foto profil Anita Tasyara]" class="w-96 h-96 object-cover rounded-full shadow-2xl anim-float border-8 border-white">
+            <i class="ph-fill ph-heart text-pink-400 text-5xl absolute top-5 right-5 sparkle-element"></i>
+            <i class="ph-fill ph-star text-yellow-400 text-4xl absolute bottom-10 left-5 sparkle-element" style="animation-delay: 0.5s;"></i>
+            <i class="ph-fill ph-paint-brush text-purple-300 text-4xl absolute top-20 left-0 sparkle-element" style="animation-delay: 1s;"></i>
+            <i class="ph-fill ph-magic-wand text-lavender-soft text-5xl absolute bottom-20 right-0 sparkle-element" style="animation-delay: 1.5s;"></i>
+        </div>
+    </section>
+
+    <section id="about" class="py-20 relative">
+        <i class="ph-fill ph-cloud-sun text-lavender-soft opacity-40 text-9xl absolute top-0 right-0 -z-10 transform -rotate-12 anim-float" style="animation-duration: 12s;"></i>
+        <div class="cute-card flex flex-col md:flex-row items-center scroll-animate card-with-bow">
+            <div class="md:w-1/3 mb-8 md:mb-0 flex justify-center">
+                <img src="anita.jpg" alt="[Foto Anita Tasyara]" class="w-64 h-64 rounded-full object-cover shadow-lg transform hover:scale-110 transition-transform duration-300 border-4 border-pink-200">
+            </div>
+            <div class="md:w-2/3 md:pl-12 text-center md:text-left">
+                <h2 class="text-5xl font-bold text-pink-500 mb-6 title-underline">Sedikit Cerita Tentang Saya</h2>
+                <p class="mb-4 text-lg">Saya seorang desainer dan ilustrator yang bersemangat dalam menciptakan solusi visual inovatif. Dengan keahlian di bidang branding, ilustrasi, dan tata letak, saya siap membantu brand Anda tampil menonjol dengan desain yang strategis dan penuh warna.</p>
+                <div class="mt-6 flex justify-center md:justify-start space-x-5 text-4xl">
+                    <a href="https://www.instagram.com/anitassyaa/" target="_blank" class="text-gray-400 hover:text-pink-500 transition-transform hover:scale-125 scroll-animate" data-stagger="1"><i class="ph-bold ph-instagram-logo"></i></a>
+                    <a href="https://www.instagram.com/rentaart/" target="_blank" class="text-gray-400 hover:text-pink-500 transition-transform hover:scale-125 scroll-animate" data-stagger="2"><i class="ph-bold ph-paint-brush"></i></a>
+                    <a href="https://www.behance.net/gallery/217841849/PORTOFOLIO-2025-ANITA-TASYARA" target="_blank" class="text-gray-400 hover:text-pink-500 transition-transform hover:scale-125 scroll-animate" data-stagger="3"><i class="ph-bold ph-behance-logo"></i></a>
+                    <a href="https://wa.me/628817821723" target="_blank" class="text-gray-400 hover:text-pink-500 transition-transform hover:scale-125 scroll-animate" data-stagger="4"><i class="ph-bold ph-whatsapp-logo"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="py-20">
+        <h2 class="text-5xl font-bold text-center mb-12 scroll-animate title-underline">Keahlian Ajaib Saya</h2>
+        <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
+            <div class="scroll-animate" data-stagger="1"><div class="flex justify-between mb-1 font-semibold text-lg"><span>Branding & Identitas Visual</span><span class="font-bold">95%</span></div><div class="h-5 w-full skill-bar-container"><div class="skill-bar" data-width="95%"></div></div></div>
+            <div class="scroll-animate" data-stagger="2"><div class="flex justify-between mb-1 font-semibold text-lg"><span>Ilustrasi Digital</span><span class="font-bold">90%</span></div><div class="h-5 w-full skill-bar-container"><div class="skill-bar" data-width="90%"></div></div></div>
+            <div class="scroll-animate" data-stagger="3"><div class="flex justify-between mb-1 font-semibold text-lg"><span>Desain Media Sosial</span><span class="font-bold">98%</span></div><div class="h-5 w-full skill-bar-container"><div class="skill-bar" data-width="98%"></div></div></div>
+            <div class="scroll-animate" data-stagger="4"><div class="flex justify-between mb-1 font-semibold text-lg"><span>Video Editing & Animasi</span><span class="font-bold">85%</span></div><div class="h-5 w-full skill-bar-container"><div class="skill-bar" data-width="85%"></div></div></div>
+        </div>
+    </section>
+
+    <section id="experience" class="py-20 relative">
+        <i class="ph-fill ph-pencil-circle text-yellow-400 opacity-25 text-8xl absolute top-20 right-0 -z-10 transform rotate-12 anim-float" style="animation-duration: 9s;"></i>
+        <h2 class="text-5xl font-bold text-center mb-12 scroll-animate title-underline">Perjalanan Kreatif Saya</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div class="scroll-animate" data-stagger="1">
+                <h3 class="text-2xl font-bold mb-6 flex items-center"><i class="ph-fill ph-briefcase text-pink-500 mr-3 text-3xl"></i>Pengalaman Kerja</h3>
+                <div class="space-y-6">
+                    <div class="bg-white p-6 rounded-xl border-l-4 border-pink-400 shadow-sm transition-transform hover:scale-105 scroll-animate" data-stagger="2"><p class="font-bold text-lg">Freelance Designer & Tiktok Management</p><p class="text-sm text-pink-500">Consulthan Digital ID | 2024 - Sekarang</p></div>
+                    <div class="bg-white p-6 rounded-xl border-l-4 border-pink-400 shadow-sm transition-transform hover:scale-105 scroll-animate" data-stagger="3"><p class="font-bold text-lg">Freelance Social Media Designer</p><p class="text-sm text-pink-500">Obsecro Studio Bandung | 2024 - Sekarang</p></div>
+                    <div class="bg-white p-6 rounded-xl border-l-4 border-pink-400 shadow-sm transition-transform hover:scale-105 scroll-animate" data-stagger="4"><p class="font-bold text-lg">Part Time Design Grafis</p><p class="text-sm text-pink-500">Fraya Souvenir | Ags 2024</p></div>
+                </div>
+            </div>
+            <div class="scroll-animate" data-stagger="2">
+                <h3 class="text-2xl font-bold mb-6 flex items-center"><i class="ph-fill ph-graduation-cap text-yellow-500 mr-3 text-3xl"></i>Pendidikan & Penghargaan</h3>
+                <div class="space-y-6">
+                    <div class="bg-white p-6 rounded-xl border-l-4 border-yellow-400 shadow-sm transition-transform hover:scale-105 scroll-animate" data-stagger="3"><p class="font-bold text-lg">SMKS PRAKARYA INTERNASIONAL BANDUNG</p><p class="text-sm text-yellow-600">Desain Komunikasi Visual | Lulus 2023</p></div>
+                    <div class="bg-white p-6 rounded-xl border-l-4 border-yellow-400 shadow-sm transition-transform hover:scale-105 scroll-animate" data-stagger="4"><p class="font-bold text-lg">Juara 3 Lomba Desain Poster</p><p class="text-sm text-yellow-600">Politeknik Negeri Bandung | 2022</p></div>
+                    <div class="bg-white p-6 rounded-xl border-l-4 border-yellow-400 shadow-sm transition-transform hover:scale-105 scroll-animate" data-stagger="5"><p class="font-bold text-lg">Sertifikat Kompetensi Keahlian</p><p class="text-sm text-yellow-600">Oleh Sembilan Matahari</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="py-20 relative">
+        <i class="ph-fill ph-shooting-star text-purple-400 opacity-30 text-8xl absolute top-10 left-10 -z-10 transform -rotate-12 anim-float" style="animation-duration: 7s;"></i>
+        <i class="ph-bold ph-swatches text-pink-400 opacity-25 text-9xl absolute bottom-10 right-10 -z-10 transform rotate-12 anim-float" style="animation-duration: 12s;"></i>
+        <div class="text-center mb-12 scroll-animate">
+            <h2 class="text-5xl font-bold inline-block relative title-underline">Beberapa Karya Saya <i class="ph-fill ph-sparkle text-yellow-400 absolute -top-4 -right-8 text-4xl transform -rotate-12"></i></h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <a href="https://www.behance.net/gallery/217841849/PORTOFOLIO-2025-ANITA-TASYARA" target="_blank" class="portfolio-card bg-white rounded-2xl shadow-lg group transform hover:-translate-y-3 transition-transform duration-300 scroll-animate" data-stagger="1">
+                <div class="relative overflow-hidden rounded-t-2xl"><img src="ondeworld.png" alt="[Proyek Branding On de World]" class="w-full h-72 object-cover group-hover:scale-110 transition-transform duration-500"><span class="absolute top-4 left-4 bg-white/80 text-pink-500 text-xs font-bold px-3 py-1 rounded-full backdrop-blur-sm">Branding</span></div>
+                <div class="p-6"><h3 class="text-2xl font-bold">Branding "On de World"</h3><p class="text-sm mt-2 text-gray-600">Proyek Ujian Kompetensi Keahlian untuk menciptakan identitas brand makanan tradisional.</p></div>
+            </a>
+            <a href="https://www.behance.net/gallery/217841849/PORTOFOLIO-2025-ANITA-TASYARA" target="_blank" class="portfolio-card bg-white rounded-2xl shadow-lg group transform hover:-translate-y-3 transition-transform duration-300 scroll-animate" data-stagger="2">
+                <div class="relative overflow-hidden rounded-t-2xl"><img src="brownies.png" alt="[Proyek Desain Kemasan Dunia Brownies]" class="w-full h-72 object-cover group-hover:scale-110 transition-transform duration-500"><span class="absolute top-4 left-4 bg-white/80 text-pink-500 text-xs font-bold px-3 py-1 rounded-full backdrop-blur-sm">Desain Kemasan</span></div>
+                <div class="p-6"><h3 class="text-2xl font-bold">Kemasan "Dunia Brownies"</h3><p class="text-sm mt-2 text-gray-600">Tugas akhir yang berfokus pada perancangan identitas brand keripik brownies.</p></div>
+            </a>
+            <a href="https://www.behance.net/gallery/217841849/PORTOFOLIO-2025-ANITA-TASYARA" target="_blank" class="portfolio-card bg-white rounded-2xl shadow-lg group transform hover:-translate-y-3 transition-transform duration-300 scroll-animate" data-stagger="3">
+                <div class="relative overflow-hidden rounded-t-2xl"><img src="ilustrasi2.png" alt="[Proyek Ilustrasi Sosial Media]" class="w-full h-72 object-cover group-hover:scale-110 transition-transform duration-500"><span class="absolute top-4 left-4 bg-white/80 text-pink-500 text-xs font-bold px-3 py-1 rounded-full backdrop-blur-sm">Ilustrasi</span></div>
+                <div class="p-6"><h3 class="text-2xl font-bold">Ilustrasi Sosial Media</h3><p class="text-sm mt-2 text-gray-600">Kumpulan ilustrasi custom yang dibuat untuk berbagai klien.</p></div>
+            </a>
+            <a href="https://www.behance.net/gallery/217841849/PORTOFOLIO-2025-ANITA-TASYARA" target="_blank" class="portfolio-card bg-white rounded-2xl shadow-lg group transform hover:-translate-y-3 transition-transform duration-300 scroll-animate" data-stagger="4">
+                <div class="relative overflow-hidden rounded-t-2xl"><img src="feed.png" alt="[Desain Feed Instagram]" class="w-full h-72 object-cover group-hover:scale-110 transition-transform duration-500"><span class="absolute top-4 left-4 bg-white/80 text-pink-500 text-xs font-bold px-3 py-1 rounded-full backdrop-blur-sm">Desain Feed</span></div>
+                <div class="p-6"><h3 class="text-2xl font-bold">Desain Feed Instagram</h3><p class="text-sm mt-2 text-gray-600">Merancang dan menata layout grid Instagram agar harmonis dan menarik.</p></div>
+            </a>
+            <a href="https://www.behance.net/gallery/217841849/PORTOFOLIO-2025-ANITA-TASYARA" target="_blank" class="portfolio-card bg-white rounded-2xl shadow-lg group transform hover:-translate-y-3 transition-transform duration-300 scroll-animate" data-stagger="5">
+                <div class="relative overflow-hidden rounded-t-2xl"><img src="animasi.png" alt="[Proyek Animasi Karakter]" class="w-full h-72 object-cover group-hover:scale-110 transition-transform duration-500"><span class="absolute top-4 left-4 bg-white/80 text-pink-500 text-xs font-bold px-3 py-1 rounded-full backdrop-blur-sm">Animasi</span></div>
+                <div class="p-6"><h3 class="text-2xl font-bold">Pengembangan Karakter</h3><p class="text-sm mt-2 text-gray-600">Proses pengembangan karakter untuk animasi, mulai dari desain alternatif.</p></div>
+            </a>
+            <a href="https://www.behance.net/gallery/217841849/PORTOFOLIO-2025-ANITA-TASYARA" target="_blank" class="portfolio-card bg-white rounded-2xl shadow-lg group transform hover:-translate-y-3 transition-transform duration-300 scroll-animate" data-stagger="6">
+                <div class="relative overflow-hidden rounded-t-2xl"><img src="ilustrasi.png" alt="[Proyek Ilustrasi Personal]" class="w-full h-72 object-cover group-hover:scale-110 transition-transform duration-500"><span class="absolute top-4 left-4 bg-white/80 text-pink-500 text-xs font-bold px-3 py-1 rounded-full backdrop-blur-sm">Ilustrasi Personal</span></div>
+                <div class="p-6"><h3 class="text-2xl font-bold">Ilustrasi Hadiah Personal</h3><p class="text-sm mt-2 text-gray-600">Mengubah momen spesial menjadi kado unik tak terlupakan.</p></div>
+            </a>
+        </div>
+        <div class="text-center mt-12 scroll-animate"><a href="https://www.behance.net/gallery/217841849/PORTOFOLIO-2025-ANITA-TASYARA" target="_blank" class="btn-cute text-lg">Lihat Lebih Banyak Lagi!</a></div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 relative">
+        <h2 class="text-5xl font-bold text-center mb-12 scroll-animate title-underline">Kata Klien Tentang Saya</h2>
+        <div class="max-w-3xl mx-auto relative scroll-animate">
+            <div class="testimonial-slider-container">
+                <div id="testimonial-slider" class="testimonial-slider">
+                    <!-- Slide 1 -->
+                    <div class="testimonial-slide">
+                        <div class="testimonial-card">
+                            <img src="https://w7.pngwing.com/pngs/584/113/png-transparent-pink-user-icon.png" alt="[Foto Klien 1]" class="w-28 h-28 rounded-full mx-auto mb-4">
+                            <p class="text-lg text-gray-600 italic">"Desainnya imut dan sesuai banget sama brand image yang aku mau! Prosesnya juga cepat dan komunikatif. Recommended banget!"</p>
+                            <h4 class="font-bold mt-4 text-pink-500">- Asep Chuba</h4>
+                        </div>
+                    </div>
+                    <!-- Slide 2 -->
+                    <div class="testimonial-slide">
+                        <div class="testimonial-card">
+                            <img src="https://w7.pngwing.com/pngs/584/113/png-transparent-pink-user-icon.png" alt="[Foto Klien 2]" class="w-28 h-28 rounded-full mx-auto mb-4">
+                            <p class="text-lg text-gray-600 italic">"Ilustrasi karakternya keren! Anita berhasil menangkap brief dengan baik dan hasilnya melebihi ekspektasi. Terima kasih!"</p>
+                            <h4 class="font-bold mt-4 text-pink-500">- Giwan Purnama</h4>
+                        </div>
+                    </div>
+                    <!-- Slide 3 -->
+                    <div class="testimonial-slide">
+                        <div class="testimonial-card">
+                            <img src="https://w7.pngwing.com/pngs/584/113/png-transparent-pink-user-icon.png" alt="[Foto Klien 3]" class="w-28 h-28 rounded-full mx-auto mb-4">
+                            <p class="text-lg text-gray-600 italic">"Manajemen konten TikTok kami jadi lebih terarah dan estetik. Engagement juga naik drastis sejak ditangani oleh Anita. Luar biasa!"</p>
+                            <h4 class="font-bold mt-4 text-pink-500">- Vivi (Consultant.id)</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="testimonial-dots" class="testimonial-dots"></div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20">
+        <div class="cute-card text-center scroll-animate relative">
+            <i class="ph-fill ph-paper-plane-tilt text-purple-300 opacity-20 text-9xl absolute -top-8 -left-8 -z-10 transform rotate-45"></i>
+            <h2 class="text-5xl font-bold text-pink-500 mb-4 title-underline">Mari Wujudkan Idemu!</h2>
+            <p class="max-w-2xl mx-auto mb-8 text-lg">Punya proyek seru? Atau sekadar ingin menyapa? Kirimkan pesan melalui form di bawah ini.</p>
+
+            <!-- Elemen pesan sukses yang akan ditampilkan setelah pengiriman berhasil -->
+            <div id="success-message" class="mt-6 p-4 rounded-2xl bg-green-100 text-green-800 font-semibold hidden items-center justify-center gap-3">
+                <i class="ph-fill ph-check-circle"></i>Pesanmu sudah terkirim! Terima kasih~ Aku akan segera membalasnya.
+            </div>
+
+            <!-- Formulir Kontak -->
+            <form id="contact-form" class="max-w-xl mx-auto" action="https://formspree.io/f/mqadvdzp" method="POST">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <input type="text" name="name" class="w-full px-5 py-4 rounded-full bg-pink-50 border-2 border-pink-200 focus:border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-300 transition" placeholder="Nama Kamu" required>
+                    <input type="email" name="email"  class="w-full px-5 py-4 rounded-full bg-pink-50 border-2 border-pink-200 focus:border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-300 transition" placeholder="Email Kamu" required>
+                </div>
+                <input type="text" name="subject" class="w-full px-5 py-4 my-4 rounded-full bg-pink-50 border-2 border-pink-200 focus:border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-300 transition" placeholder="Judul Pesan" required>
+                <textarea name="message" rows="5" class="w-full px-5 py-4 mb-6 rounded-3xl bg-pink-50 border-2 border-pink-200 focus:border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-300 transition" placeholder="Tulis pesan harapanmu di sini..." required></textarea>
+                <button type="submit" class="btn-cute text-lg">
+                    Kirim Pesan <i class="ph-fill ph-paper-plane-tilt inline-block"></i>
+                </button>
+            </form>
+
+            <!-- Elemen pesan error -->
+            <div id="error-message" class="mt-6 p-4 rounded-2xl bg-red-100 text-red-800 font-semibold hidden items-center justify-center gap-3"></div>
+        </div>
+    </section>
+</main>
+
+<footer class="bg-white text-center py-8 mt-12 border-t-2 border-pink-100 relative overflow-hidden">
+    <i class="ph-fill ph-heart text-pink-300 text-2xl absolute bottom-4 right-8 anim-float" style="animation-duration: 5s;"></i>
+    <i class="ph-fill ph-star text-yellow-300 text-xl absolute top-4 left-8 anim-float" style="animation-duration: 6s; animation-delay: 1s;"></i>
+    <i class="ph-fill ph-sparkle text-purple-200 text-2xl absolute bottom-8 left-12 anim-float" style="animation-duration: 7s;"></i>
+    <p class="font-semibold text-lg">&copy; 2025 Anita Tasyara. Dibuat dengan <i class="ph-fill ph-heart text-pink-500"></i> .</p>
+</footer>
+
+<a href="#" id="back-to-top" title="Kembali ke atas"><i class="ph-bold ph-arrow-up"></i></a>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- Preloader Logic ---
+        const preloader = document.getElementById('preloader');
+        window.addEventListener('load', () => {
+            preloader.style.opacity = '0';
+            setTimeout(() => preloader.style.display = 'none', 500);
+        });
+
+        // --- Sparkle Cursor Trail ---
+        if (window.matchMedia('(min-width: 768px)').matches) { // Only run on desktop
+            const trailCount = 20;
+            const trail = [];
+            for (let i = 0; i < trailCount; i++) {
+                let div = document.createElement('div');
+                div.classList.add('cursor-trail');
+                document.body.appendChild(div);
+                trail.push(div);
+            }
+            let currentTrailIndex = 0;
+            window.addEventListener('mousemove', e => {
+                const particle = trail[currentTrailIndex];
+                particle.style.left = `${e.clientX}px`;
+                particle.style.top = `${e.clientY}px`;
+                particle.style.opacity = 1;
+                const scale = Math.random() * 0.8 + 0.5;
+                particle.style.transform = `scale(${scale}) translate(-50%, -50%)`;
+                setTimeout(() => { particle.style.opacity = 0; }, 500);
+                currentTrailIndex = (currentTrailIndex + 1) % trailCount;
+            });
+        }
+
+        // --- Other Interactions ---
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const backToTopBtn = document.getElementById('back-to-top');
+        const progressBar = document.getElementById('progress-bar');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenuBtn.innerHTML = mobileMenu.classList.contains('hidden') ? '<i class="ph ph-list"></i>' : '<i class="ph ph-x"></i>';
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if(this.getAttribute('href') !== '#') {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+                }
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuBtn.innerHTML = '<i class="ph ph-list"></i>';
+                }
+            });
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const navLink = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+                if (entry.isIntersecting) {
+                    entry.target.querySelectorAll('.scroll-animate, .title-underline, .skill-bar').forEach((el, index) => {
+                        const delay = el.dataset.stagger ? el.dataset.stagger * 100 : index * 100;
+                        setTimeout(() => {
+                            el.classList.add('visible');
+                            if(el.classList.contains('skill-bar')) {
+                                el.style.width = el.getAttribute('data-width');
+                            }
+                        }, delay);
+                    });
+                    if(navLink) navLink.classList.add('active');
+                } else {
+                    entry.target.querySelectorAll('.scroll-animate, .title-underline, .skill-bar').forEach(el => {
+                        el.classList.remove('visible');
+                        if(el.classList.contains('skill-bar')) {
+                            el.style.width = '0%';
+                        }
+                    });
+                    if(navLink) navLink.classList.remove('active');
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('section').forEach(el => observer.observe(el));
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) { backToTopBtn.classList.add('visible'); }
+            else { backToTopBtn.classList.remove('visible'); }
+            const scrollTop = document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            progressBar.style.width = `${(scrollTop / scrollHeight) * 100}%`;
+        });
+
+        document.querySelectorAll('.btn-cute').forEach(button => {
+            button.addEventListener('click', (e) => {
+                button.classList.add('clicked');
+                setTimeout(() => button.classList.remove('clicked'), 400);
+            });
+        });
+
+        // --- REVISED FORMSPREE LOGIC ---
+        const contactForm = document.getElementById('contact-form');
+        const successMessage = document.getElementById('success-message');
+        const errorMessage = document.getElementById('error-message');
+        const submitButton = contactForm.querySelector('button[type="submit"]');
+        const originalButtonHTML = submitButton.innerHTML;
+
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const formData = new FormData(contactForm);
+
+            // Show loading state
+            submitButton.disabled = true;
+            submitButton.innerHTML = 'Mengirim...';
+            successMessage.classList.add('hidden');
+            errorMessage.classList.add('hidden');
+
+            try {
+                const response = await fetch(contactForm.action, {
+                    method: contactForm.method,
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    // Success
+                    successMessage.classList.remove('hidden');
+                    contactForm.reset(); // Mengosongkan form
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = originalButtonHTML;
+                } else {
+                    // Handle server errors (e.g., validation errors)
+                    const data = await response.json();
+                    errorMessage.textContent = data.errors ? data.errors.map(error => error.message).join(', ') : 'Oops! Terjadi kesalahan. Silakan coba lagi.';
+                    errorMessage.classList.remove('hidden');
+                    // Restore button
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = originalButtonHTML;
+                }
+            } catch (error) {
+                // Handle network errors
+                errorMessage.textContent = 'Oops! Gagal terhubung. Periksa koneksi internet Anda.';
+                errorMessage.classList.remove('hidden');
+                // Restore button
+                submitButton.disabled = false;
+                submitButton.innerHTML = originalButtonHTML;
+            }
+        });
+
+        // --- Testimonial Slider Logic ---
+        const slider = document.getElementById('testimonial-slider');
+        const dotsContainer = document.getElementById('testimonial-dots');
+        const slides = slider.querySelectorAll('.testimonial-slide');
+        let currentSlide = 0;
+
+        if (slides.length > 0) {
+            slides.forEach((_, i) => {
+                const dot = document.createElement('button');
+                dot.classList.add('testimonial-dot');
+                if (i === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => {
+                    currentSlide = i;
+                    updateSlider();
+                });
+                dotsContainer.appendChild(dot);
+            });
+
+            const dots = dotsContainer.querySelectorAll('.testimonial-dot');
+
+            function updateSlider() {
+                slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+                dots.forEach(dot => dot.classList.remove('active'));
+                dots[currentSlide].classList.add('active');
+            }
+
+            setInterval(() => {
+                currentSlide = (currentSlide + 1) % slides.length;
+                updateSlider();
+            }, 5000); // Ganti slide setiap 5 detik
+        }
+    });
+</script>
+</body>
+</html>
+
